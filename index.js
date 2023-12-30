@@ -1,23 +1,17 @@
+const http = require('http');
 
-// npm - global command, comes with node
-// npm --version
+const server = http.createServer((req,res) => {
+    // console.log(req);
+    if(req.url === '/'){
+        res.end('Welcome to our home page')
+    }
+    if(req.url === '/about'){
+        res.end('Here ia our short history')
+    }
+    res.end(`
+    <h1>oops!</h1>
+    <p> We can't find your page</p>
+    <a href="/">back home</a>`)
+})
 
-// local dependency - use it only in this perticular project
-// npm i <packageName>
-
-// local dependency - use it in any product
-// npm install -g <packageName>
-// sudo install -g <packageName> 
-
-// package.json - manifest file(stores important info about project/package)
-//  mannual approach - (create package.json in the root, create properties etc.)
-// npm init (step by step, press enter to skip)
-//npm init -y (everything default)
-
-const _ = require('lodash');
-
-const items = [1, [2, [3, [4]]]]
-const newItems = _.flattenDeep(items)
-console.log(newItems);
-console.log("hello world")
-  
+server.listen(5000);
